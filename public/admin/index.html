@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LedgerLine</title><link rel="stylesheet" href="shared/style.css"></head>
+<body>
+<section id="auth" class="auth">
+  <div class="hero">
+    <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><rect x="4" y="9" width="32" height="3" rx="1.5"/><rect x="4" y="18.5" width="32" height="3" rx="1.5"/><rect x="4" y="28" width="20" height="3" rx="1.5"/><circle cx="31" cy="29.5" r="4.5"/></svg>
+    <h1 id="heroTitle">LedgerLine</h1><p class="tag" id="heroTag"></p>
+    <ul class="pts"><li>Books always balance</li><li>Same request never pays twice</li><li>History can’t be quietly edited</li></ul>
+  </div>
+  <div class="panel">
+    <div class="seg" id="authSeg" hidden></div>
+    <form id="loginForm" class="fm" autocomplete="off"><h2>Sign in</h2>
+      <label>Email<input id="email" type="email" required></label><label>Password<input id="pw" type="password" required></label>
+      <button class="btn" type="submit">Sign in</button>
+      <p class="hint">Demo accounts — click to fill (password <code>Passw0rd!demo</code>)</p><div class="chips" id="demo"></div></form>
+    <form id="regForm" class="fm" hidden autocomplete="off"><h2>Create your account</h2>
+      <label>Full name<input id="rName" required minlength="2"></label><label>Email<input id="rEmail" type="email" required></label>
+      <label>Phone<input id="rPhone" required placeholder="+91 98765 43210"></label>
+      <label>Password (8+, letter and digit)<input id="rPw" type="password" required minlength="8"></label>
+      <label>First account name<input id="rAcct" required placeholder="e.g. My Savings"></label>
+      <label>Account type<select id="rType"><option value="savings">Savings</option><option value="current">Current</option></select></label>
+      <button class="btn" type="submit">Register</button></form>
+    <form id="audForm" class="fm" hidden autocomplete="off"><h2>Apply for auditor access</h2>
+      <p class="hint">Auditors can read every account, so an administrator reviews each application before you can sign in.</p>
+      <label>Full name<input id="aName" required minlength="2"></label><label>Work email<input id="aEmail" type="email" required></label>
+      <label>Phone<input id="aPhone" required></label><label>Organisation<input id="aOrg" required></label>
+      <label>Licence / membership id<input id="aCred" required minlength="3"></label>
+      <label>Purpose of access<input id="aWhy" required minlength="10" maxlength="300"></label>
+      <label>Password (8+, letter and digit)<input id="aPw" type="password" required minlength="8"></label>
+      <button class="btn" type="submit">Submit application</button></form>
+  </div>
+</section>
+<div id="shell" hidden>
+  <header class="top"><div class="brand"><svg class="mark sm" viewBox="0 0 40 40"><rect x="4" y="9" width="32" height="3" rx="1.5"/><rect x="4" y="18.5" width="32" height="3" rx="1.5"/><rect x="4" y="28" width="20" height="3" rx="1.5"/><circle cx="31" cy="29.5" r="4.5"/></svg>LedgerLine <span class="pill gold" id="portalTag"></span></div>
+    <div class="who"><span id="whoEmail"></span><span id="whoRole" class="pill"></span><button class="btn ghost sm" id="theme" title="Toggle theme">◐</button><button class="btn ghost sm" id="out">Sign out</button></div></header>
+  <nav id="tabs" class="tabs"></nav><main id="view"></main>
+</div>
+<div id="toasts" aria-live="polite"></div>
+<script src="portal.js"></script><script src="shared/app.js"></script></body></html>
