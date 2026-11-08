@@ -1,0 +1,18 @@
+# Render Blueprint: New > Blueprint > pick your repo. Creates a Postgres DB and the web service.
+databases:
+  - name: ledgerline-db
+    plan: free
+services:
+  - type: web
+    name: ledgerline
+    runtime: node
+    plan: free
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start            # migrates, seeds (first run only), then serves
+    healthCheckPath: /api/health
+    envVars:
+      - { key: DATABASE_URL, fromDatabase: { name: ledgerline-db, property: connectionString } }
+      - { key: JWT_SECRET, generateValue: true }
+      - { key: NODE_ENV, value: production }
+      - { key: TRUST_PROXY, value: "1" }
+      - { key: PGSSL, value: "true" }
