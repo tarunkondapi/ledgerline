@@ -11,8 +11,9 @@ if (process.env.PORT || process.env.SINGLE_PORT === 'true') {
   // API allowlist and token audience, so a holder token is useless on /admin and /auditor.
   const port = Number(process.env.PORT || 3000), root = express();
   root.disable('x-powered-by'); root.set('strict routing', true); // '/admin' redirects to '/admin/'; '/admin/' must not match that route
-    // Render's health check hits /api/health on the ROOT; without this it 404s and the deploy is marked failed.
+  // Render's health check hits /api/health on the ROOT; without this it 404s and the deploy is marked failed.
   root.get('/api/health', async (_q, r) => { try { await pool.query('SELECT 1'); r.json({ ok: true }); } catch { r.status(503).json({ ok: false }); } });
+  root.get('/', (_q, r) => r.type('html').send(`<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>LedgerLine</title>
 <body style="font:17px Georgia,serif;max-width:520px;margin:12vh auto;padding:0 20px"><h1>LedgerLine</h1><p>Money movement with a ledger you can prove. Choose a portal:</p>
 <p><a href=/holder/>Customer portal</a> · <a href=/admin/>Admin console</a> · <a href=/auditor/>Audit desk</a></p></body>`));
   for (const p of ['holder', 'admin', 'auditor']) {
